@@ -90,7 +90,7 @@ public class BookingsController : ControllerBase
         var booking = await _context.Bookings.FindAsync(id);
         if (booking == null) return NotFound();
 
-        if (newStatus != "Approved" && newStatus != "Rejected" && newStatus != "Pending")
+        if (newStatus != "Approved" && newStatus != "Rejected" && newStatus != "Pending" && newStatus != "Cancelled")
         {
             return BadRequest("Status tidak valid.");
         }

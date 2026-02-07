@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SiperuBackend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f5c3937ae52e51a3ec8b22ba80136ef71157ee48")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2f83b9f99c7121e7008f3dea1ec3ad58e5d31ccf")]
 [assembly: System.Reflection.AssemblyProductAttribute("SiperuBackend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SiperuBackend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
