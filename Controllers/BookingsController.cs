@@ -39,7 +39,7 @@ public class BookingsController : ControllerBase
         return await query.OrderByDescending(b => b.StartTime).ToListAsync();
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{id}")] // cihuy
     public async Task<ActionResult<Booking>> GetBooking(int id)
     {
         var booking = await _context.Bookings
