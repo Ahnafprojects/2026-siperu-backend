@@ -11,3 +11,8 @@ Semua perubahan penting akan dicatat di file ini.
 - Dokumentasi API via Swagger (OpenAPI).
 - Dokumentasi proyek: `README.md` dan `.env.example`.
 - Contoh request koleksi API di `SiperuBackend.http`.
+
+## [v1.0.1] - 2026-02-07
+### Added
+- Workflow CI (GitHub Actions) untuk build.
+- Badge CI pada `README.md`.
