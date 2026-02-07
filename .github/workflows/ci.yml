@@ -20,7 +20,7 @@ jobs:
           dotnet-version: '10.0.x'
 
       - name: Restore
-        run: dotnet restore
+        run: dotnet restore 2026-siperu-backend.sln
 
       - name: Build
-        run: dotnet build --no-restore -c Release
+        run: dotnet build 2026-siperu-backend.sln --no-restore -c Release
