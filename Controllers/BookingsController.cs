@@ -16,13 +16,32 @@ public class BookingsController : ControllerBase
         _context = context;
     }
 
-    // 1. GET: api/bookings (Lihat semua peminjaman + Data Ruangannya)
+    // 1. GET: api/bookings (Dengan Fitur Filter & Search)
+    // Contoh Request: GET api/bookings?status=Pending&search=Ahnaf
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Booking>>> GetBookings()
+    public async Task<ActionResult<IEnumerable<Booking>>> GetBookings(
+        [FromQuery] string? status, 
+        [FromQuery] string? search)
     {
-        // .Include(b => b.Room) itu fungsinya mirip JOIN di SQL.
-        // Biar pas ambil data booking, data ruangannya kebawa juga.
-        return await _context.Bookings.Include(b => b.Room).ToListAsync();
+        // Siapkan Query (Belum dieksekusi ke DB)
+        var query = _context.Bookings.Include(b => b.Room).AsQueryable();
+
+        // 1. Filter berdasarkan Status (misal: cuma mau lihat yang 'Pending')
+        if (!string.IsNullOrEmpty(status))
+        {
+            query = query.Where(b => b.Status.ToLower() == status.ToLower());
+        }
+
+        // 2. Filter Search (Cari nama mahasiswa ATAU keperluan)
+        if (!string.IsNullOrEmpty(search))
+        {
+            query = query.Where(b => 
+                b.StudentName.Contains(search) || 
+                b.Purpose.Contains(search));
+        }
+
+        // Eksekusi dan urutkan dari yang terbaru (Descending)
+        return await query.OrderByDescending(b => b.StartTime).ToListAsync();
     }
 
     // 2. GET: api/bookings/5
