@@ -48,6 +48,9 @@ dotnet run
 - `GET /api/rooms`
 - `GET /api/bookings`
 
+4. Contoh request siap pakai:
+- Lihat file `SiperuBackend.http` untuk contoh request Rooms dan Bookings.
+
 Catatan:
 - SQLite database default akan menggunakan file `siperu.db`.
 - Seed data untuk Room dan Booking akan masuk saat migrasi dijalankan.

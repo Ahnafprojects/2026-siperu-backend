@@ -1,6 +1,51 @@
-@SiperuBackend_HostAddress = http://localhost:5250
+@SiperuBackend_HostAddress = http://localhost:5000
 
-GET {{SiperuBackend_HostAddress}}/weatherforecast/
+### Get all rooms
+GET {{SiperuBackend_HostAddress}}/api/rooms
 Accept: application/json
 
 ###
+### Get room by id
+GET {{SiperuBackend_HostAddress}}/api/rooms/1
+Accept: application/json
+
+###
+### Create room
+POST {{SiperuBackend_HostAddress}}/api/rooms
+Content-Type: application/json
+
+{
+  "name": "C-201",
+  "capacity": 35,
+  "description": "Ruang Kelas Lantai 2",
+  "isAvailable": true
+}
+
+###
+### Get bookings (optional filters: status, search)
+GET {{SiperuBackend_HostAddress}}/api/bookings?status=Approved&search=Rapat
+Accept: application/json
+
+###
+### Create booking
+POST {{SiperuBackend_HostAddress}}/api/bookings
+Content-Type: application/json
+
+{
+  "studentName": "Dewi Lestari",
+  "purpose": "Rapat UKM",
+  "startTime": "2026-02-15T09:00:00",
+  "endTime": "2026-02-15T11:00:00",
+  "roomId": 2
+}
+
+###
+### Update booking status
+PUT {{SiperuBackend_HostAddress}}/api/bookings/1/status
+Content-Type: application/json
+
+"Approved"
+
+###
+### Delete booking
+DELETE {{SiperuBackend_HostAddress}}/api/bookings/1

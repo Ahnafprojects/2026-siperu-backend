@@ -10,3 +10,4 @@ Semua perubahan penting akan dicatat di file ini.
 - Seed data untuk Rooms dan Bookings.
 - Dokumentasi API via Swagger (OpenAPI).
 - Dokumentasi proyek: `README.md` dan `.env.example`.
+- Contoh request koleksi API di `SiperuBackend.http`.
