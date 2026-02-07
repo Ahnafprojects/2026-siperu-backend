@@ -20,7 +20,7 @@ public class BookingsController : ControllerBase
     // Contoh Request: GET api/bookings?status=Pending&search=Ahnaf
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Booking>>> GetBookings(
-        [FromQuery] string? status, 
+        [FromQuery] string? status,
         [FromQuery] string? search)
     {
         // Siapkan Query (Belum dieksekusi ke DB)
@@ -35,8 +35,8 @@ public class BookingsController : ControllerBase
         // 2. Filter Search (Cari nama mahasiswa ATAU keperluan)
         if (!string.IsNullOrEmpty(search))
         {
-            query = query.Where(b => 
-                b.StudentName.Contains(search) || 
+            query = query.Where(b =>
+                b.StudentName.Contains(search) ||
                 b.Purpose.Contains(search));
         }
 
@@ -76,7 +76,7 @@ public class BookingsController : ControllerBase
 
         // Set status default
         booking.Status = "Pending";
-        
+
         _context.Bookings.Add(booking);
         await _context.SaveChangesAsync();
 
@@ -102,7 +102,7 @@ public class BookingsController : ControllerBase
 
         return NoContent();
     }
-    
+
     // 5. DELETE: api/bookings/5 (Batalkan Peminjaman)
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteBooking(int id)

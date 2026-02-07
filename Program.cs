@@ -7,6 +7,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers(); // Untuk Controllers
 builder.Services.AddEndpointsApiExplorer(); // Untuk Swagger
 builder.Services.AddSwaggerGen(); // Untuk Swagger UI
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy =>
+        {
+            policy.AllowAnyOrigin() // Allow any origin for development
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
 
 // Add Database Service
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -20,6 +30,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger(); // Enable Swagger
     app.UseSwaggerUI(); // Enable Swagger UI
 }
+
+app.UseHttpsRedirection();
+
+// Aktifkan Policy CORS
+app.UseCors("AllowFrontend");
+
+app.UseAuthorization();
 
 app.MapControllers(); // Routing untuk Controllers
 
