@@ -46,3 +46,6 @@ artifacts/
 # OS Files
 .DS_Store
 Thumbs.db
+
+# Env files
+.env
