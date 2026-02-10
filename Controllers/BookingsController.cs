@@ -101,21 +101,13 @@ public class BookingsController : ControllerBase
         var booking = await _context.Bookings.FindAsync(id);
         if (booking == null) return NotFound();
 
-<<<<<<< HEAD
         if (newStatus != "Approved" && newStatus != "Rejected" && newStatus != "Pending" && newStatus != "Cancelled")
-=======
-        if (newStatus != "Approved" &&
-    newStatus != "Rejected" &&
-    newStatus != "Pending" &&
-    newStatus != "Cancelled")
->>>>>>> origin/develop
         {
             return BadRequest("Status tidak valid. Opsi: Approved, Rejected, Pending, Cancelled");
         }
 
         // LOGIKA BARU: Jika Admin mau meng-Approve, cek dulu bentrok gak?
-        igit checkout fix/booking-collision-logic
-git pull origin developf (newStatus == "Approved")
+        if (newStatus == "Approved")
         {
             // Cek bentrok dengan booking LAIN (selain diri sendiri)
             if (await IsRoomBooked(booking.RoomId, booking.StartTime, booking.EndTime, booking.Id))
