@@ -107,7 +107,8 @@ public class BookingsController : ControllerBase
         }
 
         // LOGIKA BARU: Jika Admin mau meng-Approve, cek dulu bentrok gak?
-        if (newStatus == "Approved")
+        igit checkout fix/booking-collision-logic
+git pull origin developf (newStatus == "Approved")
         {
             // Cek bentrok dengan booking LAIN (selain diri sendiri)
             if (await IsRoomBooked(booking.RoomId, booking.StartTime, booking.EndTime, booking.Id))
