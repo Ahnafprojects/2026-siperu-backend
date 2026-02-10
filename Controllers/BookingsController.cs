@@ -55,28 +55,39 @@ public class BookingsController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Booking>> PostBooking(Booking booking)
     {
-        // 1. Validasi Waktu Dasar
+        // --- 1. VALIDASI MASA LALU (Dari branch develop) ---
+        if (booking.StartTime < DateTime.Now)
+        {
+            return BadRequest("Gagal: Tidak bisa meminjam ruangan di waktu yang sudah lewat.");
+        }
+
+        // --- 2. VALIDASI DURASI ---
         if (booking.EndTime <= booking.StartTime)
         {
             return BadRequest("Waktu selesai harus lebih besar dari waktu mulai.");
         }
 
-        // 2. Validasi Ruangan Ada
-        var room = await _context.Rooms.FindAsync(booking.RoomId);
-        if (room == null)
+        // --- 3. VALIDASI BENTROK / DOUBLE BOOKING (Dari branch fiturmu) ---
+        // Cek apakah ada booking lain di Ruangan yg sama DAN Statusnya Approved
+        var collision = _context.Bookings.Any(b => 
+            b.RoomId == booking.RoomId &&
+            b.Status == "Approved" && // Cuma cek yang sudah disetujui
+            (
+                (booking.StartTime >= b.StartTime && booking.StartTime < b.EndTime) ||
+                (booking.EndTime > b.StartTime && booking.EndTime <= b.EndTime) ||
+                (booking.StartTime <= b.StartTime && booking.EndTime >= b.EndTime)
+            )
+        );
+
+        if (collision)
         {
-            return BadRequest("Ruangan tidak ditemukan.");
+            return BadRequest("Gagal: Ruangan sudah terpakai di jam tersebut.");
         }
 
-        // 3. CEK BENTROK (Collision Check)
-        // Kita cek apakah ada booking lain yg statusnya "Approved" di jam yang sama
-        if (await IsRoomBooked(booking.RoomId, booking.StartTime, booking.EndTime))
-        {
-            return BadRequest("Maaf, ruangan sudah dipesan (Approved) pada jam tersebut.");
-        }
-
-        booking.Status = "Pending";
+        // --- 4. SET DEFAULT STATUS ---
+        booking.Status = "Pending"; // Default status harus Pending
         
+        // --- 5. SIMPAN KE DATABASE ---
         _context.Bookings.Add(booking);
         await _context.SaveChangesAsync();
 
