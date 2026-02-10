@@ -1,7 +1,14 @@
 # Siperu Backend
 ![CI](https://github.com/Ahnafprojects/2026-siperu-backend/actions/workflows/ci.yml/badge.svg?branch=develop)
 
-Backend API untuk sistem peminjaman/booking ruangan (SIPERU). Menyediakan endpoint CRUD untuk data ruangan dan booking, termasuk validasi bentrok jadwal, serta dokumentasi API melalui Swagger.
+Backend API untuk sistem peminjaman/booking ruangan (SIPERU). Dibuat untuk memudahkan pengelolaan jadwal peminjaman ruangan kampus secara terpusat. Menyediakan endpoint CRUD untuk data ruangan dan booking, termasuk validasi bentrok jadwal, serta dokumentasi API melalui Swagger.
+
+**Fitur**
+- CRUD Rooms
+- CRUD Bookings
+- Update status booking (Approved/Rejected/Pending)
+- Validasi bentrok jadwal untuk booking status Approved
+- Swagger UI untuk dokumentasi API
 
 **Teknologi**
 - .NET 10 (ASP.NET Core Web API)
@@ -33,7 +40,7 @@ Variabel yang dipakai:
 - `ASPNETCORE_URLS` (contoh: `https://localhost:5001;http://localhost:5000`)
 - `ConnectionStrings__DefaultConnection` (contoh: `Data Source=siperu.db`)
 
-**Panduan Menjalankan**
+**Usage**
 1. Jalankan aplikasi:
 
 ```bash
@@ -55,3 +62,12 @@ dotnet run
 Catatan:
 - SQLite database default akan menggunakan file `siperu.db`.
 - Seed data untuk Room dan Booking akan masuk saat migrasi dijalankan.
+
+**Contributing**
+- Pull request dipersilakan. Buat branch baru dari `develop`, sertakan deskripsi perubahan, dan pastikan build lokal berhasil.
+
+**License**
+- Belum ditentukan. Semua hak cipta dimiliki oleh pemilik proyek.
+
+**Credits**
+- Muhammad Ahnaf (Author)

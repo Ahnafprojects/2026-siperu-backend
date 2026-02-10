@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/muhammadahnaf/ProjectAhnaf/2026-siperu-backend/SiperuBackend.csproj": {}
+    "/Users/muhammadahnaf/PENS/Simulasi PBL/2026-siperu-backend/SiperuBackend.csproj": {}
   },
   "projects": {
-    "/Users/muhammadahnaf/ProjectAhnaf/2026-siperu-backend/SiperuBackend.csproj": {
+    "/Users/muhammadahnaf/PENS/Simulasi PBL/2026-siperu-backend/SiperuBackend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/muhammadahnaf/ProjectAhnaf/2026-siperu-backend/SiperuBackend.csproj",
+        "projectUniqueName": "/Users/muhammadahnaf/PENS/Simulasi PBL/2026-siperu-backend/SiperuBackend.csproj",
         "projectName": "SiperuBackend",
-        "projectPath": "/Users/muhammadahnaf/ProjectAhnaf/2026-siperu-backend/SiperuBackend.csproj",
+        "projectPath": "/Users/muhammadahnaf/PENS/Simulasi PBL/2026-siperu-backend/SiperuBackend.csproj",
         "packagesPath": "/Users/muhammadahnaf/.nuget/packages/",
-        "outputPath": "/Users/muhammadahnaf/ProjectAhnaf/2026-siperu-backend/obj/",
+        "outputPath": "/Users/muhammadahnaf/PENS/Simulasi PBL/2026-siperu-backend/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/muhammadahnaf/.nuget/NuGet/NuGet.Config"
