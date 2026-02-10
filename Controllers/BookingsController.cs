@@ -19,7 +19,7 @@ public class BookingsController : ControllerBase
     // GET methods (Tetap sama, tidak berubah)
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Booking>>> GetBookings(
-        [FromQuery] string? status, 
+        [FromQuery] string? status,
         [FromQuery] string? search)
     {
         var query = _context.Bookings.Include(b => b.Room).AsQueryable();
@@ -31,8 +31,8 @@ public class BookingsController : ControllerBase
 
         if (!string.IsNullOrEmpty(search))
         {
-            query = query.Where(b => 
-                b.StudentName.Contains(search) || 
+            query = query.Where(b =>
+                b.StudentName.Contains(search) ||
                 b.Purpose.Contains(search));
         }
 
@@ -55,7 +55,7 @@ public class BookingsController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Booking>> PostBooking(Booking booking)
     {
-        // --- 1. VALIDASI MASA LALU (Dari branch develop) ---
+        // --- 1. VALIDASI MASA LALU ---
         if (booking.StartTime < DateTime.Now)
         {
             return BadRequest("Gagal: Tidak bisa meminjam ruangan di waktu yang sudah lewat.");
@@ -67,7 +67,7 @@ public class BookingsController : ControllerBase
             return BadRequest("Waktu selesai harus lebih besar dari waktu mulai.");
         }
 
-        // --- 3. VALIDASI BENTROK / DOUBLE BOOKING (Dari branch fiturmu) ---
+        // --- 3. VALIDASI BENTROK / DOUBLE BOOKING ---
         // Cek apakah ada booking lain di Ruangan yg sama DAN Statusnya Approved
         var collision = _context.Bookings.Any(b => 
             b.RoomId == booking.RoomId &&
@@ -101,9 +101,16 @@ public class BookingsController : ControllerBase
         var booking = await _context.Bookings.FindAsync(id);
         if (booking == null) return NotFound();
 
+<<<<<<< HEAD
         if (newStatus != "Approved" && newStatus != "Rejected" && newStatus != "Pending" && newStatus != "Cancelled")
+=======
+        if (newStatus != "Approved" &&
+    newStatus != "Rejected" &&
+    newStatus != "Pending" &&
+    newStatus != "Cancelled")
+>>>>>>> origin/develop
         {
-            return BadRequest("Status tidak valid.");
+            return BadRequest("Status tidak valid. Opsi: Approved, Rejected, Pending, Cancelled");
         }
 
         // LOGIKA BARU: Jika Admin mau meng-Approve, cek dulu bentrok gak?
@@ -139,7 +146,7 @@ git pull origin developf (newStatus == "Approved")
     private async Task<bool> IsRoomBooked(int roomId, DateTime start, DateTime end, int? excludeBookingId = null)
     {
         return await _context.Bookings.AnyAsync(b =>
-            b.RoomId == roomId && 
+            b.RoomId == roomId &&
             b.Status == "Approved" && // Cuma peduli sama yang udah Approved
             b.Id != excludeBookingId && // Jangan cek bentrok sama diri sendiri
             (start < b.EndTime && end > b.StartTime) // Rumus Matematika Bentrok
